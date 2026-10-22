@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Beautiful Queenly – Presentación interactiva</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Lato:wght@400;700&display=swap">
+<style>
+:root{--bg:#fbf6f3;--tx:#2b1a2e;--mu:#7a6470;--ac:#b3125a;--cd:#fff;--bd:#eadfe0;--hd:#2b1a2e;--hdt:#fbf6f3;--gd:#d9a441;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1f1322;--tx:#f3e9ee;--mu:#b9a3b0;--ac:#f06fa4;--cd:#2e1d33;--bd:#4a3350;--hd:#3a2340;--hdt:#f3e9ee}}
+:root[data-theme="dark"]{--bg:#1f1322;--tx:#f3e9ee;--mu:#b9a3b0;--ac:#f06fa4;--cd:#2e1d33;--bd:#4a3350;--hd:#3a2340;--hdt:#f3e9ee}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--tx);font-family:Lato,Arial,sans-serif;font-size:17px;line-height:1.45;display:flex;flex-direction:column}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 20px;border-bottom:1px solid var(--bd);font-size:14px;color:var(--mu)}
+header b{color:var(--tx)}
+#bar{height:4px;background:var(--bd)}#bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .3s}
+main{flex:1;overflow-y:auto;padding:24px 20px 16px;max-width:980px;width:100%;margin:0 auto}
+.s{display:none}.s.on{display:block}
+h1,h2{font-family:'Playfair Display',Georgia,serif;margin:0 0 14px;line-height:1.1}
+h1{font-size:clamp(38px,9vw,72px)}h2{font-size:clamp(28px,6vw,44px)}
+.kick{color:var(--gd);letter-spacing:3px;font-size:13px;font-weight:700;margin:0 0 8px}
+.hint{color:var(--mu);font-size:14px;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.card,details{background:var(--cd);border:1px solid var(--bd);border-radius:14px;padding:16px 18px}
+details>summary{cursor:pointer;font-weight:700;font-size:19px;color:var(--ac);list-style:none;display:flex;justify-content:space-between;gap:10px}
+details>summary::after{content:"＋";}details[open]>summary::after{content:"－"}
+details>summary::-webkit-details-marker{display:none}
+details>*:not(summary){margin:10px 0 0}
+button{font:inherit;cursor:pointer}
+.btn{background:var(--ac);color:#fff;border:0;border-radius:999px;padding:10px 20px;font-weight:700}
+.btn.o{background:transparent;color:var(--ac);border:2px solid var(--ac)}
+.btn:disabled{opacity:.35;cursor:default}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tabs button{background:var(--cd);color:var(--tx);border:1px solid var(--bd);border-radius:999px;padding:8px 16px}
+.tabs button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.pn{display:none}.pn.on{display:block}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-top:22px}
+.menu button{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:12px;text-align:left;color:var(--tx)}
+.menu span{display:block;color:var(--ac);font-weight:700;font-size:13px}
+.wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:320px}
+th{background:var(--hd);color:var(--hdt);text-align:left}
+th,td{padding:10px 14px;border-bottom:1px solid var(--bd)}
+td:last-child{text-align:right;white-space:nowrap}
+.f{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin:12px 0}
+label{display:flex;flex-direction:column;font-size:14px;color:var(--mu);gap:4px}
+input{font:inherit;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--cd);color:var(--tx);width:170px}
+.res{font-size:20px;font-weight:700;color:var(--ac)}
+footer{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 20px 14px;border-top:1px solid var(--bd)}
+#dots{display:flex;gap:7px;flex-wrap:wrap;justify-content:center}
+#dots button{width:12px;height:12px;border-radius:50%;border:0;padding:0;background:var(--bd)}#dots button.on{background:var(--ac)}
+ul{padding-left:20px}
+</style>
+</head>
+<body>
+<header><span><b>Beautiful Queenly</b> · Fundamentos de Administración y Economía</span><span id="num"></span></header>
+<div id="bar"><i></i></div>
+<main>
+
+<section class="s on">
+<p class="kick">PROYECTO DE EMPRESA · MODA FEMENINA</p>
+<h1>Beautiful Queenly</h1>
+<p>Trinidad Isabel Paredes Molina<br>Universidad ECCI · Bogotá D. C., Colombia · 2026</p>
+<button class="btn" data-go="1">Comenzar</button>
+<p class="hint" style="margin-top:22px">O elige una sección:</p>
+<div class="menu">
+<button data-go="1"><span>Corte 1</span>Identidad</button>
+<button data-go="2"><span>Corte 1</span>Objetivos</button>
+<button data-go="3"><span>Corte 1</span>Factores e inversión</button>
+<button data-go="4"><span>Corte 1</span>Mercado</button>
+<button data-go="5"><span>Corte 2</span>Decisión estratégica</button>
+<button data-go="6"><span>Corte 3</span>Inflación y devaluación</button>
+<button data-go="7"><span>Cierre</span>Conclusiones</button>
+</div>
+</section>
+
+<section class="s">
+<h2>Corte 1 · Identidad de la empresa</h2>
+<p class="hint">Toca cada tarjeta para abrirla.</p>
+<div class="grid">
+<details><summary>Misión</summary><p>Diseñar, confeccionar y comercializar prendas femeninas modernas, cómodas y versátiles, con alternativas de tallaje y ajustes, atención cercana y precios accesibles.</p></details>
+<details><summary>Visión</summary><p>Para 2030, ser una marca colombiana reconocida por su moda femenina inclusiva, la calidad de sus prendas y su atención personalizada, llegando a clientas de distintas ciudades por canales digitales.</p></details>
+<details><summary>Concepto del nombre</summary><p>El nombre representa belleza, seguridad y autenticidad: cada clienta encuentra prendas con las que se siente cómoda y expresa su personalidad.</p></details>
+</div>
+</section>
+
+<section class="s">
+<h2>Objetivos estratégicos SMART</h2>
+<div class="card" style="margin-bottom:14px"><b>General:</b> consolidar una marca de moda femenina diferenciada por comodidad, versatilidad y opciones de ajuste, con operación pequeña y ventas digitales.</div>
+<p class="hint">Elige un área para ver su meta.</p>
+<div class="tabset">
+<div class="tabs"><button class="on">Comercial</button><button>Producto</button><button>Servicio</button><button>Canales</button><button>Finanzas</button></div>
+<div class="pn on card">Al menos 100 compras pagadas en los primeros 12 meses, con registro de clientes para medir recompra y satisfacción.</div>
+<div class="pn card">Colección inicial de al menos 8 referencias en 6 meses, probadas con clientas potenciales.</div>
+<div class="pn card">Guía de tallas, registro de medidas y opciones de ajuste en al menos 3 referencias durante el primer año.</div>
+<div class="pn card">Mínimo dos canales digitales activos, con contenido constante y revisión mensual de consultas y ventas.</div>
+<div class="pn card">Registro mensual de ingresos, costos, inventario y flujo de caja, y margen por referencia antes de ampliar el catálogo.</div>
+</div>
+</section>
+
+<section class="s">
+<h2>Factores de producción e inversión</h2>
+<div class="grid" style="margin-bottom:16px">
+<details><summary>Trabajo</summary><p>Fundadora-diseñadora; patronista y taller de confección por servicio.</p></details>
+<details><summary>Capital y materiales</summary><p>Máquina de coser, fileteadora y herramientas propias, alquiladas o compartidas; telas e insumos.</p></details>
+<details><summary>Infraestructura</summary><p>Casa o espacio compartido, computador, celular e internet.</p></details>
+</div>
+<div class="wrap"><table>
+<tr><th>Inversión inicial</th><th>COP</th></tr>
+<tr><td>Patronaje y muestras</td><td>$700.000</td></tr>
+<tr><td>Telas e insumos</td><td>$1.300.000</td></tr>
+<tr><td>Confección externa</td><td>$900.000</td></tr>
+<tr><td>Etiquetas y empaques</td><td>$250.000</td></tr>
+<tr><td>Fotografía y promoción</td><td>$350.000</td></tr>
+<tr><td>Transporte y trámites</td><td>$300.000</td></tr>
+<tr><td>Reserva de caja</td><td>$1.200.000</td></tr>
+<tr><td><b>Total</b></td><td><b>$5.000.000</b></td></tr>
+</table></div>
+</section>
+
+<section class="s">
+<h2>Descripción del mercado</h2>
+<p class="hint">Elige un segmento.</p>
+<div class="tabset">
+<div class="tabs"><button class="on">Mujeres jóvenes · 18 a 27</button><button>Mujeres adultas · 28 a 40</button></div>
+<div class="pn on card"><p>Prendas versátiles para estudio, trabajo inicial y salidas.</p><p><b>Deciden por:</b> precio, diseño y facilidad de combinar.</p><p><b>Canales:</b> redes sociales y catálogo digital.</p></div>
+<div class="pn card"><p>Prendas cómodas y funcionales para trabajo y eventos.</p><p><b>Deciden por:</b> calidad, ajuste y durabilidad.</p><p><b>Canales:</b> redes sociales y atención por mensajería.</p></div>
+</div>
+<p style="margin-top:16px"><b>Propuesta de valor:</b> diseño, comodidad y versatilidad, con guía de medidas y opciones de ajuste.</p>
+</section>
+
+<section class="s">
+<h2>Corte 2 · Decisión estratégica</h2>
+<div class="grid" style="margin-bottom:18px">
+<details><summary>1. Problema</summary><p>¿Cómo diferenciarse y atraer clientas sin salirse del presupuesto de $5.000.000?</p></details>
+<details><summary>2. Criterios</summary><p>Comodidad, propuesta de valor, diferenciación y costo.</p></details>
+<details><summary>3. Alternativas</summary><p>[Por definir con el grupo]</p></details>
+<details><summary>4. Análisis y elección</summary><p>[Matriz de criterios por completar]</p></details>
+</div>
+<div class="card"><b style="color:var(--ac)">Calculadora de punto de equilibrio</b>
+<p class="hint">Unidades = costos fijos ÷ (precio − costo variable). Costos fijos de referencia: $1.030.000 al mes.</p>
+<div class="f"><label>Precio por prenda ($)<input id="pr" type="number" inputmode="numeric" min="0" placeholder="Ej: 90000"></label>
+<label>Costo variable ($)<input id="cv" type="number" inputmode="numeric" min="0" placeholder="Ej: 45000"></label></div>
+<div class="res" id="out">Escribe tus valores.</div></div>
+</section>
+
+<section class="s">
+<h2>Corte 3 · Inflación y devaluación</h2>
+<div class="tabset">
+<div class="tabs"><button class="on">Inflación</button><button>Devaluación</button></div>
+<div class="pn on card"><p>IPC anual de 6,29 % en septiembre de 2026 (DANE).</p><p>Encarece telas, hilos, empaques, confección y envíos, y reduce el dinero de las clientas para comprar ropa.</p></div>
+<div class="pn card"><p>Un peso más débil encarece los insumos importados y los de proveedores que importan materias primas.</p><p>El efecto depende de los materiales, su origen y los acuerdos con proveedores.</p></div>
+</div>
+<p class="hint" style="margin-top:18px">Tres acciones para mitigar sus efectos:</p>
+<div class="grid">
+<details><summary>Comprar con comparación</summary><p>Al menos dos cotizaciones por insumo principal, comparando calidad, precio, transporte y pago.</p></details>
+<details><summary>Lotes pequeños y preventas</summary><p>Recibir pedidos antes de fabricar lotes mayores, para no quedarse con inventario sin vender.</p></details>
+<details><summary>Control mensual</summary><p>Registrar costo por prenda, margen y flujo de caja, y mantener una reserva para imprevistos.</p></details>
+</div>
+</section>
+
+<section class="s">
+<h2>Conclusiones</h2>
+<p class="hint">Toca cada una para leerla.</p>
+<div style="display:grid;gap:12px">
+<details><summary>Propuesta</summary><p>Beautiful Queenly une comodidad, versatilidad y ajuste en una propuesta de moda femenina.</p></details>
+<details><summary>Inversión</summary><p>Los $5.000.000 sirven como escenario austero de validación, con lotes pequeños y confección externa.</p></details>
+<details><summary>Riesgos económicos</summary><p>La inflación y la devaluación pueden subir costos y frenar compras; la mejor defensa es comprar con información y producir con pedidos.</p></details>
+<details><summary>Crecimiento</summary><p>El seguimiento mensual de costos, ventas y flujo de caja permitirá crecer de forma gradual.</p></details>
+</div>
+</section>
+
+</main>
+<footer>
+<button class="btn o" id="prev">← Anterior</button>
+<div id="dots"></div>
+<button class="btn" id="next">Siguiente →</button>
+</footer>
+<script>
+var S=[].slice.call(document.querySelectorAll('.s')),i=0,d=document.getElementById('dots');
+S.forEach(function(_,k){var b=document.createElement('button');b.setAttribute('aria-label','Diapositiva '+(k+1));b.onclick=function(){go(k)};d.appendChild(b)});
+function go(k){i=Math.max(0,Math.min(S.length-1,k));S.forEach(function(s,j){s.classList.toggle('on',j===i)});
+[].forEach.call(d.children,function(b,j){b.classList.toggle('on',j===i)});
+document.getElementById('prev').disabled=i===0;document.getElementById('next').disabled=i===S.length-1;
+document.getElementById('num').textContent=(i+1)+' / '+S.length;
+document.querySelector('#bar i').style.width=((i+1)/S.length*100)+'%';
+document.querySelector('main').scrollTop=0}
+document.getElementById('prev').onclick=function(){go(i-1)};
+document.getElementById('next').onclick=function(){go(i+1)};
+[].forEach.call(document.querySelectorAll('[data-go]'),function(b){b.onclick=function(){go(+b.dataset.go)}});
+document.addEventListener('keydown',function(e){if(e.key==='ArrowRight')go(i+1);if(e.key==='ArrowLeft')go(i-1)});
+[].forEach.call(document.querySelectorAll('.tabset'),function(t){
+var bs=t.querySelectorAll('.tabs button'),ps=t.querySelectorAll('.pn');
+[].forEach.call(bs,function(b,k){b.onclick=function(){[].forEach.call(bs,function(x,j){x.classList.toggle('on',j===k);ps[j].classList.toggle('on',j===k)})}})});
+function calc(){var p=+document.getElementById('pr').value,c=+document.getElementById('cv').value,o=document.getElementById('out');
+if(!p||!c){o.textContent='Escribe tus valores.';return}
+if(p<=c){o.textContent='El precio debe ser mayor al costo variable.';return}
+var u=Math.ceil(1030000/(p-c));o.textContent='Punto de equilibrio: '+u.toLocaleString('es-CO')+' prendas al mes'}
+document.getElementById('pr').oninput=calc;document.getElementById('cv').oninput=calc;
+go(0);
+</script>
+</body>
+</html>
